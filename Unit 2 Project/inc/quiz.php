@@ -2,17 +2,49 @@
 // Start the session
 session_start();
 // Include questions from the questions.php file
-include 'inc/questions.php';
-// Make a variable to hold the total number of questions to ask
-$questions = 10;
-// Make a variable to hold the toast message and set it to an empty string.
-$toast = "";
+include ('inc/questions.php');
+
 // Make a variable to determine if the score will be shown or not. Set it to false.
 $score = false;
 // Make a variable to hold a random index. Assign null to it.
 $randomIndex = null;
 // Make a variable to hold the current question. Assign null to it.
 $currentQuestion = null;
+
+$index = rand(0, count($questions));
+
+$question = $questions[$index];
+
+$answers = array($question["correctAnswer"],
+                 $question["firstIncorrectAnswer"],
+                 $question["secondIncorrectAnswer"]);
+
+shuffle($answers);
+
+// Make a variable to hold the toast message and set it to an empty string.
+$toast = null;
+
+//Checks if $_SERVER['REQUEST_METHOD'] is equal to POST
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+    if($_POST['answer'] == $questions[$_POST['index']]['correctAnswer']) {
+        $toast = "Well done! That's correct.";
+    } else {
+        $toast = "Bummer! That was incorrect.";
+  }
+}
+
+// Make a variable to hold the total number of questions to ask
+$totalQuestions = count($questions);
+
+
+//Checks to see if $_SESSION['used_indexes'] is set
+if (!isset($_SESSION['used_indexes'])) {
+   $_SESSION['used_indexes'] = [];
+   $_SESSION['totalCorrect'] = 0;
+   array_push($_SESSION['used_indexes'], $index);
+}
+
+
 
 /*
     If the server request was of type POST
@@ -23,10 +55,7 @@ $currentQuestion = null;
         Otherwise:
             1. Assign a bummer message to the toast variable.
 */
-for($i = 1, $i <= 10, $i++) {
-  if(isset($_POST[]))
-}
-}
+
 /*
     Check if a session variable has ever been set/created to hold the indexes of questions already asked.
     If it has NOT:
