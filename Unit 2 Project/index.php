@@ -15,8 +15,11 @@ var_dump($_SESSION["used_indexes"]);
 <body>
     <div class="container">
         <div id="quiz-box">
-           <?php if($toast != null) {
-                    echo "<p> $toast </p>";
+           <?php if ($toast != null) {
+                     echo "<p>$toast</p>";
+}
+                 if ($show_score == true) {
+                      echo '<p>You got ' .$_SESSION["totalCorrect"]. ' of ' .$totalQuestions. ' correct!</p>';
 }?>
             <p class="breadcrumbs">Question <?php echo count($_SESSION["used_indexes"]) ?> of <?php echo $totalQuestions ?> </p>
             <p class="quiz">What is <?php echo $question["leftAdder"]; ?> + <?php echo $question["rightAdder"]; ?>?</p>
