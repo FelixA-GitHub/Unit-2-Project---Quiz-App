@@ -26,7 +26,7 @@ $toast = null;
 if($_SERVER['REQUEST_METHOD'] == "POST") {
     if($_POST['answer'] == $questions[$_POST['index']]['correctAnswer']) {
         $toast = "Well done! That's correct.";
-        $_SESSION["totalCorrect"] +1;
+        $_SESSION["totalCorrect"]++;
     } else {
         $toast = "Bummer! That was incorrect.";
   }
@@ -34,6 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 // Make a variable to hold the total number of questions to ask
 $totalQuestions = count($questions);
+
 
 
 /*
@@ -71,7 +72,7 @@ if (isset($_SESSION['used_indexes'])) {
             firstIncorrectAnswer, and secondIncorrect answer from the variable in step e.
         h. Shuffle the array from step g.
 */
-if ($_SESSION["used_indexes"] == $totalQuestions){
+if (count($_SESSION["used_indexes"]) == $totalQuestions){
     $_SESSION["used_indexes"] = [];
     $show_score = true;
 } else {
@@ -83,6 +84,7 @@ if ($_SESSION["used_indexes"] == $totalQuestions){
     $index = rand(0, count($questions));
     $question = $questions[$index];
     array_push($_SESSION["used_indexes"], $index);
+    //$question = $questions[$index];
     $answers = array($question["correctAnswer"],
                  $question["firstIncorrectAnswer"],
                  $question["secondIncorrectAnswer"]);

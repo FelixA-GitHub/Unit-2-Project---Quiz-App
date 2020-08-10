@@ -21,10 +21,10 @@ var_dump($_SESSION["used_indexes"]);
                  if ($show_score == true) {
                       echo '<p>You got ' .$_SESSION["totalCorrect"]. ' of ' .$totalQuestions. ' correct!</p>';
 }?>
-            <p class="breadcrumbs">Question <?php echo count($_SESSION["used_indexes"]) ?> of <?php echo $totalQuestions ?> </p>
+            <p class="breadcrumbs">Question <?php echo count($_SESSION["used_indexes"]); ?> of <?php echo $totalQuestions; ?> </p>
             <p class="quiz">What is <?php echo $question["leftAdder"]; ?> + <?php echo $question["rightAdder"]; ?>?</p>
             <form action="index.php" method="post">
-                <input type="hidden" name="index" value="2" />
+                <input type="hidden" name="index" value="<?php echo $index; ?>" />
                 <input type="submit" class="btn" name="answer" value="<?php echo $answers[0]; ?>" />
                 <input type="submit" class="btn" name="answer" value="<?php echo $answers[1]; ?>" />
                 <input type="submit" class="btn" name="answer" value="<?php echo $answers[2]; ?>" />
