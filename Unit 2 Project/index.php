@@ -1,6 +1,6 @@
 <?php
 include ('inc/quiz.php');
-var_dump($_SESSION["used_indexes"]);
+//var_dump($_SESSION["used_indexes"]);
 ?>
 
 <!DOCTYPE html>
@@ -15,20 +15,29 @@ var_dump($_SESSION["used_indexes"]);
 <body>
     <div class="container">
         <div id="quiz-box">
-           <?php if ($toast != null) {
-                     echo "<p>$toast</p>";
-}
-                 if ($show_score == true) {
-                      echo '<p>You got ' .$_SESSION["totalCorrect"]. ' of ' .$totalQuestions. ' correct!</p>';
-}?>
-            <p class="breadcrumbs">Question <?php echo count($_SESSION["used_indexes"]); ?> of <?php echo $totalQuestions; ?> </p>
-            <p class="quiz">What is <?php echo $question["leftAdder"]; ?> + <?php echo $question["rightAdder"]; ?>?</p>
-            <form action="index.php" method="post">
-                <input type="hidden" name="index" value="<?php echo $index; ?>" />
-                <input type="submit" class="btn" name="answer" value="<?php echo $answers[0]; ?>" />
-                <input type="submit" class="btn" name="answer" value="<?php echo $answers[1]; ?>" />
-                <input type="submit" class="btn" name="answer" value="<?php echo $answers[2]; ?>" />
-            </form>
+            <?php if (($toast != null) && ($show_score == false)) {
+                     echo '<p>' . $toast . '</p>';
+                   }
+
+                  if ($show_score == true) {
+                     if ($_SESSION['totalCorrect'] < 7) {
+                        echo '<p> Bummer! Study more and try again! </p>';
+                        echo '<p>You got ' . $_SESSION["totalCorrect"] . ' of ' . $totalQuestions . ' correct! </p>';
+                     } else {
+                          echo '<p> Yay! Well Done! </p>';
+                          echo '<p>You got ' . $_SESSION["totalCorrect"] . ' of ' . $totalQuestions . ' correct! </p>';
+                     }
+                   } else {
+                        echo '<p class="breadcrumbs">Question ' . count($_SESSION["used_indexes"]) . ' of ' . $totalQuestions . '</p>';
+                        echo '<p class="quiz">What is ' . $question["leftAdder"] . ' + ' . $question["rightAdder"] . '? </p>';
+                        echo '<form action="index.php" method="post">
+                        <input type="hidden" name="index" value="' . $index . '" />
+                        <input type="submit" class="btn" name="answer" value="' . $answers[0] . '" />
+                        <input type="submit" class="btn" name="answer" value="' . $answers[1] . '" />
+                        <input type="submit" class="btn" name="answer" value="' . $answers[2] . '" />
+                      </form>';
+                   }
+             ?>
         </div>
     </div>
 </body>

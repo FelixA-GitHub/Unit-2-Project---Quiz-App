@@ -1,18 +1,21 @@
 <?php
 // Start the session
 session_start();
+
 // Include questions from the questions.php file
 include ('inc/questions.php');
 
 // Make a variable to determine if the score will be shown or not. Set it to false.
 $show_score = false;
+
 // Make a variable to hold a random index. Assign null to it.
 $index = null;
+
 // Make a variable to hold the current question. Assign null to it.
 $currentQuestion = null;
 
 // Make a variable to hold the toast message and set it to an empty string.
-$toast = null;
+$toast = "";
 
 /*
     If the server request was of type POST
@@ -32,9 +35,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
   }
 }
 
+
 // Make a variable to hold the total number of questions to ask
 $totalQuestions = count($questions);
-
 
 
 /*
@@ -43,13 +46,6 @@ $totalQuestions = count($questions);
         1. Create a session variable to hold used indexes and initialize it to an empty array.
         2. Set the show score variable to false.
 */
-
-if (isset($_SESSION['used_indexes'])) {
-   if (!isset($_SESSION['used_indexes'])) {
-      $_SESSION['used_indexes'] = [];
-      $show_score = false;
-   }
-}
 
 /*
   If the number of used indexes in our session variable is equal to the total number of questions
@@ -72,22 +68,29 @@ if (isset($_SESSION['used_indexes'])) {
             firstIncorrectAnswer, and secondIncorrect answer from the variable in step e.
         h. Shuffle the array from step g.
 */
-if (count($_SESSION["used_indexes"]) == $totalQuestions){
-    $_SESSION["used_indexes"] = [];
+if(!isset($_SESSION['used_indexes']) || count($_SESSION['used_indexes']) == $totalQuestions) {
     $show_score = true;
+    $_SESSION['used_indexes'] = [];
 } else {
     $show_score = false;
-    if (count($_SESSION["used_indexes"]) == 0) {
-        $_SESSION["totalCorrect"] = 0;
-        $toast = "";
+    if(count($_SESSION['used_indexes']) == 0) {
+        $_SESSION['totalCorrect'] = 0;
+        $toast = '';
     }
-    $index = rand(0, count($questions));
+    do {
+        $index = array_rand($questions);
+    } while ($index == count($_SESSION["used_indexes"]));
+
     $question = $questions[$index];
-    array_push($_SESSION["used_indexes"], $index);
-    //$question = $questions[$index];
-    $answers = array($question["correctAnswer"],
-                 $question["firstIncorrectAnswer"],
-                 $question["secondIncorrectAnswer"]);
+
+    array_push($_SESSION['used_indexes'], $index);
+
+    $count = count($_SESSION['used_indexes']);
+
+    $answers = [$question['correctAnswer'],
+                $question['firstIncorrectAnswer'],
+                $question['secondIncorrectAnswer']];
+
     shuffle($answers);
 }
 
