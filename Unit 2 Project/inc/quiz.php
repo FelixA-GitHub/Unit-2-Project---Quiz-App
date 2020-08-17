@@ -70,10 +70,3 @@ if(!isset($_SESSION['used_indexes']) || count($_SESSION['used_indexes']) == $tot
 //Answers shuffled so they are appear in random buttons
   shuffle($answers);
 }
-
-
-
-
-
-
-//session_destroy();
