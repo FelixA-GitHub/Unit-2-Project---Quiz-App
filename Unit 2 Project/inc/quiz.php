@@ -80,9 +80,9 @@ if(!isset($_SESSION['used_indexes']) || count($_SESSION['used_indexes']) == $tot
     }
     do {
         $index = array_rand($questions);
-    } while ($index == count($_SESSION["used_indexes"]));
+    } while (in_array($index, $_SESSION["used_indexes"]));
 
-    $question = $questions[$index];
+    $question =  $_SESSION['questions'][$index];
 
     array_push($_SESSION['used_indexes'], $index);
 
