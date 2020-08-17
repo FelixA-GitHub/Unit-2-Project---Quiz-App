@@ -23,6 +23,8 @@ include ('inc/quiz.php');
                      if ($_SESSION['totalCorrect'] < 7) {
                         echo '<p> Bummer! Study more and try again! </p>';
                         echo '<p>You got ' . $_SESSION["totalCorrect"] . ' of ' . $totalQuestions . ' correct! </p>';
+                        echo '<form action="" method="get">
+                          <input type="submit" name="restart" value="Restart Quiz" /></form>';
                      } else {
                           echo '<p> Yay! Well Done! </p>';
                           echo '<p>You got ' . $_SESSION["totalCorrect"] . ' of ' . $totalQuestions . ' correct! </p>';

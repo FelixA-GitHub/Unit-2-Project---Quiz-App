@@ -1,7 +1,7 @@
 <?php
 // Generate random questions
-
-$questions = [];
+function getRandomQuestions() {
+$questions = array();
 
 // Loop for required number of questions
 for ($i = 0; $i <= 9; $i++) {
@@ -27,5 +27,7 @@ for ($i = 0; $i <= 9; $i++) {
     } while ($questions[$i]['secondIncorrectAnswer'] == $questions[$i]['correctAnswer']);
 
 // Add question and answer to questions array
+
+  }
+  return $questions;
 }
-//echo $questions;

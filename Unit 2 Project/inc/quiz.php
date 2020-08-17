@@ -3,7 +3,7 @@
 session_start();
 
 // Include questions from the questions.php file
-include ('inc/questions.php');
+include ('inc/generate_questions.php');
 
 // Make a variable to determine if the score will be shown or not. Set it to false.
 $show_score = false;
@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 // Make a variable to hold the total number of questions to ask
-$totalQuestions = count($questions);
+$totalQuestions = count(getRandomQuestions());
 
 
 /*
@@ -74,6 +74,7 @@ if(!isset($_SESSION['used_indexes']) || count($_SESSION['used_indexes']) == $tot
 } else {
     $show_score = false;
     if(count($_SESSION['used_indexes']) == 0) {
+        $_SESSION['questions'] = getRandomQuestions();
         $_SESSION['totalCorrect'] = 0;
         $toast = '';
     }
