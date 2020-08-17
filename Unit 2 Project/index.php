@@ -1,6 +1,5 @@
 <?php
 include ('inc/quiz.php');
-//var_dump($_SESSION["used_indexes"]);
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +25,10 @@ include ('inc/quiz.php');
                         echo '<form action="" method="get">
                           <input type="submit" name="restart" value="Restart Quiz" /></form>';
                      } else {
-                          echo '<p> Yay! Well Done! </p>';
+                          echo '<p> CELEBRATE GOOD TIMES, COME ON!! </p>';
                           echo '<p>You got ' . $_SESSION["totalCorrect"] . ' of ' . $totalQuestions . ' correct! </p>';
+                          echo '<form action="" method="get">
+                          <input type="submit" name="restart" value="Restart Quiz" /></form>';
                      }
                    } else {
                         echo '<p class="breadcrumbs">Question ' . count($_SESSION["used_indexes"]) . ' of ' . $totalQuestions . '</p>';
