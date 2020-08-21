@@ -29,7 +29,7 @@ for ($i = 0; $i <= 9; $i++) {
 
   do {
         $new_questions[$i]['secondIncorrectAnswer'] = $new_questions[$i]['correctAnswer'] + rand(-10,10);
-    } while ($new_questions[$i]['secondIncorrectAnswer'] == $new_questions[$i]['correctAnswer']);
+    } while ($new_questions[$i]['secondIncorrectAnswer'] == ($new_questions[$i]['correctAnswer'] || $new_questions[$i]['firstIncorrectAnswer']));
 
   }
 
